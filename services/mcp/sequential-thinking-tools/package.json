@@ -1,0 +1,15 @@
+{
+  "name": "sequential-thinking-tools",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "mcp-sequentialthinking-tools": "^0.0.2"
+  }
+}

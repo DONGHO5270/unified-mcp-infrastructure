@@ -1,0 +1,53 @@
+{
+  "name": "serper-search-scrape-mcp-server",
+  "version": "0.2.0",
+  "description": "Serper MCP Server supporting search and webpage scraping",
+  "type": "module",
+  "bin": {
+    "serper-mcp": "./build/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "inspector": "npx @modelcontextprotocol/inspector build/index.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "test:integration": "node --experimental-vm-modules node_modules/jest/bin/jest.js --testMatch \"<rootDir>/src/**/*.integration.test.ts\""
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "0.6.0",
+    "dotenv": "^16.4.7",
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.24",
+    "@types/node-fetch": "^2.6.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcopesani/mcp-server-serper.git"
+  },
+  "keywords": [
+    "mcp",
+    "serper",
+    "search",
+    "scrape",
+    "claude",
+    "claude-desktop",
+    "modelcontextprotocol"
+  ],
+  "author": "Marco Pesani",
+  "license": "MIT"
+}

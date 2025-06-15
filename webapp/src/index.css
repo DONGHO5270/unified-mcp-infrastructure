@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans antialiased;
+  }
+}
+
+@layer components {
+  .service-card {
+    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200;
+  }
+  
+  .status-indicator {
+    @apply w-3 h-3 rounded-full;
+  }
+  
+  .status-healthy {
+    @apply bg-success-500;
+  }
+  
+  .status-degraded {
+    @apply bg-warning-500;
+  }
+  
+  .status-unhealthy {
+    @apply bg-error-500;
+  }
+}

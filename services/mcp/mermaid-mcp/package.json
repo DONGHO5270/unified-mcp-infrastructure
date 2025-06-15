@@ -1,0 +1,28 @@
+{
+  "name": "@mcp/mermaid-playwright-server",
+  "version": "1.0.0",
+  "description": "A Model Context Protocol (MCP) server that converts Mermaid diagrams to PNG images using Playwright",
+  "main": "mermaid-playwright.js",
+  "type": "module",
+  "scripts": {
+    "start": "node mermaid-playwright.js"
+  },
+  "keywords": [
+    "mermaid",
+    "diagram", 
+    "mcp",
+    "model-context-protocol",
+    "playwright",
+    "visualization"
+  ],
+  "author": "MCP Infrastructure",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.1",
+    "playwright": "^1.52.0",
+    "mermaid": "^11.4.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

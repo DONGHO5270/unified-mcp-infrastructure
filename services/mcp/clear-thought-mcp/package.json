@@ -1,0 +1,7 @@
+{
+  "name": "clear-thought-wrapper",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "*"
+  }
+}

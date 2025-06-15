@@ -1,0 +1,135 @@
+# =============================================
+# 통합 MCP 인프라 - 프로덕션 깔끔 업로드용 .gitignore
+# =============================================
+
+# 모든 마크다운 문서 (README만 제외)
+*.md
+!README.md
+
+# 모든 로그 파일
+logs/
+*.log
+*.log.*
+
+# 모든 백업 파일 
+backups/
+*.backup
+*.backup.*
+*_backup
+*.old
+
+# 모든 테스트/디버그 파일
+test-*
+debug-*
+diagnose-*
+validate-*
+monitor-*
+check-*
+*-test.*
+*-debug.*
+
+# Windows 배치/스크립트 파일 (핵심 제외)
+*.bat
+*.cmd
+*.ps1
+!scripts/*.sh
+
+# 임시 및 실험 파일
+*temp*
+*tmp*
+simple_*
+analyze-*
+apply-*
+fix-*
+generate-*
+create-*
+setup-*
+start-*
+restart-*
+run-*
+install-*
+configure-*
+clean-*
+recover-*
+restore-*
+update-*
+
+# 개별 브리지 파일들
+services/desktop-bridges*
+services/mcp-*bridge*
+services/*wrapper*
+services/*stdio*
+services/*direct*
+services/*http*
+
+# Node modules 및 빌드
+node_modules/
+dist/
+build/
+*.js.map
+
+# 환경 설정
+.env*
+configs/api-keys.env
+configs/*.env
+!configs/*.template
+!configs/*.example
+
+# 특수 문자/오류 파일
+nul
+{
+C:\*
+"*"
+
+# 프로젝트별 폴더 (선택적)
+hdap-*
+dockeeper/
+claude-desktop-*
+webapp-prototype/
+taskmaster-refactoring/
+
+# JSON 설정 백업들
+claude_desktop_config_*.json
+!claude_desktop_config.json.template
+
+# 실험/개발 폴더
+quick-improvements/
+auto-doc-generator/
+SOLUTIONS/
+
+# 언어별 파일들 (한국어 문서들)
+*한국어*
+*생태계*
+*분석*
+*요약*
+*보고서*
+라이선스-*
+오픈소스-*
+현실체크-*
+
+# 기타 실험 파일들
+*.heap
+*.cpuprofile
+*.txt
+!README.txt
+!LICENSE.txt
+
+# =============================================
+# 반드시 포함할 파일들
+# =============================================
+!README.md
+!CLAUDE.md
+!LICENSE
+!package.json
+!tsconfig.json
+!docker-compose-mcp-ondemand.yml
+!Dockerfile
+!.gitignore
+!/scripts/
+!/configs/*.template
+!/services/mcp-router/
+!/webapp/src/
+!/webapp/public/
+!/webapp/package.json
+!/webapp/tsconfig.json
+!/docs/

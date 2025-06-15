@@ -1,0 +1,18 @@
+{
+	"name": "vercel-mcp",
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"build": "tsc",
+		"start": "node dist/index.js",
+		"dev": "tsc -w"
+	},
+	"dependencies": {
+		"@modelcontextprotocol/sdk": "latest",
+		"zod": "latest"
+	},
+	"devDependencies": {
+		"typescript": "latest",
+		"@types/node": "latest"
+	}
+}

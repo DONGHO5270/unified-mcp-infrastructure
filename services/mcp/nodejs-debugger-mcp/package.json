@@ -1,0 +1,46 @@
+{
+  "name": "@hyperdrive-eng/mcp-nodejs-debugger",
+  "version": "0.2.2",
+  "description": "An MCP server to debug Node.js at runtime",
+  "main": "index.js",
+  "bin": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "postinstall": "npm install @modelcontextprotocol/sdk node-fetch ws zod"
+  },
+  "author": "Hyperdrive",
+  "license": "MIT",
+  "keywords": [
+    "claude",
+    "claude-code",
+    "mcp",
+    "model-context-protocol",
+    "inspector",
+    "debugger",
+    "nodejs"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "node-fetch": "^3.3.2",
+    "ws": "^8.18.2",
+    "zod": "^3.25.48"
+  },
+  "files": [
+    "index.js",
+    "src/",
+    "README.md"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyperdrive-eng/mcp-nodejs-debugger"
+  },
+  "bugs": {
+    "url": "https://github.com/hyperdrive-eng/mcp-nodejs-debugger/issues"
+  },
+  "homepage": "https://hyperdrive.engineering"
+}

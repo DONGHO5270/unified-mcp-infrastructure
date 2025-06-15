@@ -1,0 +1,117 @@
+version: '3.8'
+
+# 온디맨드 MCP 서비스 Docker Compose 파일
+
+# 전역 UTF-8 인코딩 설정
+x-encoding-env: &encoding-env
+  LANG: C.UTF-8
+  LC_ALL: C.UTF-8
+  PYTHONIOENCODING: utf-8
+  TZ: Asia/Seoul
+
+networks:
+  mcp-network:
+    external: true
+
+volumes:
+  mcp-router-logs:
+  playwright-browsers:
+  taskmaster-data:
+  mermaid-output:
+
+services:
+  # MCP Router - 중앙 라우터 (상시 실행)
+  mcp-router:
+    build:
+      context: ../../services/mcp-router
+      dockerfile: Dockerfile
+    container_name: mcp-router
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    ports:
+      - "3100:3000"
+    environment:
+      <<: *encoding-env
+      NODE_ENV: production
+      LOG_LEVEL: info
+      MAX_CONCURRENT_PROCESSES: 10
+      REQUEST_TIMEOUT: 70000
+      PROCESS_IDLE_TIMEOUT: 60000
+    volumes:
+      # MCP 서비스들 마운트 (읽기/쓰기 권한으로 변경)
+      - /mnt/c/claude-development/unified-mcp-infrastructure/services/mcp:/app/services/mcp
+      # 로그 볼륨
+      - mcp-router-logs:/logs
+      # Playwright 브라우저 캐시
+      - playwright-browsers:/app/ms-playwright
+      # 설정 파일
+      - /mnt/c/claude-development/unified-mcp-infrastructure/configs/api-keys.env:/app/configs/api-keys.env:ro
+      - /mnt/c/claude-development/unified-mcp-infrastructure/configs/environment.env:/app/configs/environment.env:ro
+      # Webapp 빌드 파일
+      - /mnt/c/claude-development/unified-mcp-infrastructure/webapp/build:/app/webapp/build:ro
+      # WSL 파일시스템 접근
+      - /mnt/c:/workspace
+      # Docker 소켓 (프로세스 관리용)
+      - /var/run/docker.sock:/var/run/docker.sock
+    env_file:
+      - /mnt/c/claude-development/unified-mcp-infrastructure/configs/api-keys.env
+      - /mnt/c/claude-development/unified-mcp-infrastructure/configs/environment.env
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1); }).on('error', () => { process.exit(1); })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        # KST 시간대 정보 포함
+        tag: "{{.ImageName}}/{{.Name}}/{{.ID}}"
+
+  # Nginx API Gateway (기존과 동일)
+  gateway:
+    image: nginx:alpine
+    container_name: mcp-gateway
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    ports:
+      - "${GATEWAY_PORT:-80}:80"
+    volumes:
+      - /mnt/c/claude-development/unified-mcp-infrastructure/configs/nginx-mcp.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - mcp-router
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Ollama Service for Local AI Models
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama-service
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    volumes:
+      # 기존 Ollama 데이터 사용
+      - /mnt/c/cursortask/kfood_n_timer/.ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 59 130 246; /* blue-500 */
+    --color-secondary: 99 102 241; /* indigo-500 */
+    --color-success: 16 185 129; /* green-500 */
+    --color-warning: 245 158 11; /* amber-500 */
+    --color-error: 239 68 68; /* red-500 */
+    --color-background: 255 255 255;
+    --color-surface: 249 250 251;
+    --color-text: 17 24 39;
+    --color-text-muted: 107 114 128;
+  }
+
+  .dark {
+    --color-primary: 96 165 250; /* blue-400 */
+    --color-secondary: 129 140 248; /* indigo-400 */
+    --color-success: 52 211 153; /* green-400 */
+    --color-warning: 251 191 36; /* amber-400 */
+    --color-error: 248 113 113; /* red-400 */
+    --color-background: 17 24 39;
+    --color-surface: 31 41 55;
+    --color-text: 243 244 246;
+    --color-text-muted: 156 163 175;
+  }
+}
+
+@layer components {
+  /* Service status indicators */
+  .status-indicator {
+    @apply w-2 h-2 rounded-full flex-shrink-0;
+  }
+
+  .status-healthy {
+    @apply bg-green-500;
+    animation: pulse-green 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .status-degraded {
+    @apply bg-yellow-500;
+    animation: pulse-yellow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .status-unhealthy {
+    @apply bg-red-500;
+    animation: pulse-red 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Service card */
+  .service-card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 hover:shadow-md transition-all duration-200;
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 font-medium py-2 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+  }
+
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
+  }
+
+  /* Form inputs */
+  .form-input {
+    @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1;
+  }
+
+  /* Sidebar navigation */
+  .nav-item {
+    @apply flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-colors;
+  }
+
+  .nav-item-active {
+    @apply bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400;
+  }
+
+  .nav-item-inactive {
+    @apply text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700;
+  }
+
+  /* Tooltips */
+  .tooltip {
+    @apply absolute z-10 px-2 py-1 text-xs font-medium text-white bg-gray-900 rounded-md shadow-sm opacity-0 transition-opacity duration-300 pointer-events-none;
+  }
+
+  .tooltip-visible {
+    @apply opacity-100;
+  }
+
+  /* Scrollbar */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(156 163 175) transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500 dark:bg-gray-500;
+  }
+}
+
+@layer utilities {
+  /* Animations */
+  @keyframes pulse-green {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes pulse-yellow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes pulse-red {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Custom utilities */
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.2s ease-out;
+  }
+
+  /* Typography */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600;
+  }
+
+  /* Layout */
+  .grid-auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  /* Focus styles */
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-break {
+    page-break-after: always;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "playwright-smithery-proxy",
+  "version": "1.0.0",
+  "description": "Smithery Playwright MCP Proxy",
+  "main": "smithery-stdio-proxy.js",
+  "type": "commonjs",
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
