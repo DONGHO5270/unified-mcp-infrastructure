@@ -1,5 +1,7 @@
 # 🚀 통합 MCP 인프라 (Unified MCP Infrastructure)
 
+[English](README-EN.md) | 한국어
+
 ## 📋 개요
 
 22개 MCP(Model Context Protocol) 서비스를 온디맨드 방식으로 통합 관리하는 Docker 기반 인프라입니다.
